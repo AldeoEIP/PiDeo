@@ -8,8 +8,30 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock Text="yo" FontSize="{StaticResource HubHeaderThemeFontSize}"/>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Row="0">
+            <Image Source="Assets/2017_logo_aldeo.png" MaxWidth="420"></Image>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <StackPanel>
+                <Grid>
+                    <TextBlock Name="Answer"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="60" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox Name="Message"/>
+                    <Button Grid.Column="1" Content="Send" Click="ButtonBase_OnClick"></Button>
+                </Grid>
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>
