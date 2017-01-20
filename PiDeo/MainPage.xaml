@@ -8,6 +8,8 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="yo" FontSize="{StaticResource HubHeaderThemeFontSize}"/>
+        </Grid>
     </Grid>
 </Page>
