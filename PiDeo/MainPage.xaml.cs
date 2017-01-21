@@ -35,6 +35,7 @@ namespace PiDeo {
             CoreWindow.GetForCurrentThread ().KeyDown += MainPage_KeyDown;
 
             _gpio = GpioController.GetDefault ();
+            Message.Text = "";
         }
 
         private void MainPage_KeyDown(CoreWindow sender, KeyEventArgs e) {
@@ -43,17 +44,19 @@ namespace PiDeo {
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e) {
-            var message = Message.Text;
-            if (string.IsNullOrWhiteSpace (message))
-                return;
-            if (message.Trim ().Equals ("Vol")) {
-                if (_gpio != null)
-                    TakeOff ();
-                else
-                    message = "Je ne sens pas mes ailes ! Mon avatar est il connecté ?";
-            }
+            Answer.Text = Ask (Message.Text);
+        }
 
-            Answer.Text = "Je n'ai pas accès au avoir draconique.";
+        private string Ask(string message) {
+            if (string.IsNullOrWhiteSpace (message))
+                return "Il fait beau aujourd'hui.";
+            if (message.Trim ().Equals ("Vol")) {
+                if (_gpio == null)
+                    return "Je ne sens pas mes ailes ! Mon avatar est il connecté ?";
+                TakeOff ();
+                return "Ça fait du bien de se dégourdir.";
+            }
+            return "Je n'ai pas accès au avoir draconique.";
         }
 
         private void TakeOff() {
