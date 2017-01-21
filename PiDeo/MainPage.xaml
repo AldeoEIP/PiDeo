@@ -8,30 +8,42 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-        </Grid.RowDefinitions>
+        <Grid Margin="6">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <Grid VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Row="0">
-            <Image Source="Assets/2017_logo_aldeo.png" MaxWidth="420"></Image>
-        </Grid>
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Row="0">
+                <Image Source="Assets/2017_logo_aldeo.png" MaxWidth="420"/>
+            </Grid>
 
-        <Grid Grid.Row="1">
-            <StackPanel>
-                <Grid>
-                    <TextBlock Name="Answer"/>
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="60" />
-                    </Grid.ColumnDefinitions>
-                    <TextBox Name="Message"/>
-                    <Button Grid.Column="1" Content="Send" Click="ButtonBase_OnClick"></Button>
-                </Grid>
-            </StackPanel>
+            <Grid Grid.Row="1">
+                <StackPanel>
+                    <Grid>
+                        <TextBlock Name="Answer"/>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Border Margin="6,6,6,0"
+                    BorderBrush="{StaticResource SystemControlHighlightAccentBrush}"
+                    BorderThickness="0,0,0,6">
+                            <TextBox x:Name="Message"
+                         HorizontalAlignment="Stretch"
+                         VerticalAlignment="Bottom"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         FontSize="{StaticResource TextStyleLargeFontSize}" />
+                        </Border>
+                        <Button
+                        Grid.Column="1" Content="" Background="{StaticResource SystemControlHighlightAccentBrush}"
+                        Foreground="White" FontFamily="Segoe UI Symbol" FontSize="{StaticResource HubHeaderThemeFontSize}" Click="ButtonBase_OnClick"/>
+                    </Grid>
+                </StackPanel>
+            </Grid>
         </Grid>
     </Grid>
 </Page>
