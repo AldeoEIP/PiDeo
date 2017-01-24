@@ -1,23 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.ApplicationModel.Chat;
-using Windows.Devices.Gpio;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using Windows.Devices.Gpio;
 using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace PiDeo {
     /// <summary>
@@ -27,7 +12,7 @@ namespace PiDeo {
         static GpioController _gpio;
 
         private const int LedPin = 17;
-        private GpioPin _pin;
+        private readonly GpioPin _pin;
         private bool _flag;
 
         public MainPage() {
@@ -36,6 +21,9 @@ namespace PiDeo {
 
             _gpio = GpioController.GetDefault ();
             Message.Text = "";
+            _pin = _gpio.OpenPin (LedPin);
+            _pin.Write (GpioPinValue.Low);
+            _pin.SetDriveMode (GpioPinDriveMode.Output);
         }
 
         private void MainPage_KeyDown(CoreWindow sender, KeyEventArgs e) {
@@ -53,17 +41,10 @@ namespace PiDeo {
             if (message.Trim ().Equals ("Vol")) {
                 if (_gpio == null)
                     return "Je ne sens pas mes ailes ! Mon avatar est il connecté ?";
-                TakeOff ();
+                FlapDragon ();
                 return "Ça fait du bien de se dégourdir.";
             }
             return "Je n'ai pas accès au avoir draconique.";
-        }
-
-        private void TakeOff() {
-            _pin = _gpio.OpenPin (LedPin);
-            _pin.Write (GpioPinValue.Low);
-            _pin.SetDriveMode (GpioPinDriveMode.Output);
-            FlapDragon ();
         }
 
         private void FlapDragon() {
