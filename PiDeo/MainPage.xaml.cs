@@ -11,7 +11,6 @@ namespace PiDeo {
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class MainPage : Page {
-        //static GpioController _gpio;
 
         private const int LedPin = 17;
         private GpioPin _pin;
@@ -28,16 +27,12 @@ namespace PiDeo {
         private void StartScenario() {
             var gpio = GpioController.GetDefault ();
 
-            // Set up our GPIO pin for setting values.
-            // If this next line crashes with a NullReferenceException,
-            // then the problem is that there is no GPIO controller on the device.
             if (gpio == null)
                 return;
             _isPiConnected = true;
 
             _pin = gpio.OpenPin (LedPin);
 
-            // _pin.Write (GpioPinValue.Low); // we dont need this
             _pin.SetDriveMode (GpioPinDriveMode.Output);
         }
 
@@ -63,8 +58,6 @@ namespace PiDeo {
         }
 
         private void FlapDragon() {
-            //_pin.Write (_flag ? GpioPinValue.High : GpioPinValue.Low);
-            //_flag = !_flag;
             _pin.Write (1 - _pin.Read ());
         }
 
