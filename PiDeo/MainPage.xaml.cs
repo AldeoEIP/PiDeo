@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Windows.Devices.Gpio;
 using Windows.System;
 using Windows.UI.Core;
@@ -57,8 +58,11 @@ namespace PiDeo {
             return "Je n'ai pas accès au avoir draconique.";
         }
 
-        private void FlapDragon() {
-            _pin.Write (1 - _pin.Read ());
+        private async void FlapDragon()
+        {
+            _pin.Write(GpioPinValue.High);
+            await Task.Delay(TimeSpan.FromSeconds(2));
+            _pin.Write(GpioPinValue.Low);
         }
 
         //private async void OnMessage(ChatMessage msg) {
