@@ -32,7 +32,7 @@ namespace PiDeo {
             _isPiConnected = true;
 
             _pin = gpio.OpenPin (LedPin);
-
+            _pin.Write (GpioPinValue.Low);
             _pin.SetDriveMode (GpioPinDriveMode.Output);
         }
 
