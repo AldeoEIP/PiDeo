@@ -48,7 +48,7 @@ namespace PiDeo {
         private string Ask(string message) {
             if (string.IsNullOrWhiteSpace (message))
                 return "Il fait beau aujourd'hui.";
-            if (message.Trim ().Equals ("Vol")) {
+            if (message.Trim ().Equals ("Vol", StringComparison.OrdinalIgnoreCase)) {
                 if (!_isPiConnected)
                     return "Je ne sens pas mes ailes ! Mon avatar est il connecté ?";
                 FlapDragon ();
