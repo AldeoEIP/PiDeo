@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Windows.Devices.Gpio;
 using Windows.Storage;
 using Windows.System;
@@ -131,8 +132,10 @@ namespace PiDeo {
             }
         }
 
-        private void FlapDragon() {
-            _pin.Write (1 - _pin.Read ());
+        private async void FlapDragon() {
+            _pin.Write (GpioPinValue.High);
+            await Task.Delay (TimeSpan.FromSeconds (2));
+            _pin.Write (GpioPinValue.Low);
         }
 
         //private async void OnMessage(ChatMessage msg) {
