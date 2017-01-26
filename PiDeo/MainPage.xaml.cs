@@ -45,7 +45,7 @@ namespace PiDeo {
             var composite = (ApplicationDataCompositeValue) _localSettings.Values["credentials"];
 
             if (composite == null || composite["login"] == null || composite["password"] == null)
-                return;
+                    return;
 
             var login = composite["login"].ToString ();
             var password = composite["password"].ToString ();
@@ -116,6 +116,7 @@ namespace PiDeo {
             if (message.Trim ().StartsWith ("Bye", StringComparison.OrdinalIgnoreCase)) {
                 _localSettings.Values.Remove ("credentials");
                 ToggleConnection ();
+                return "Hello";
             }
             if (message.Trim ().StartsWith ("Vol", StringComparison.OrdinalIgnoreCase)) {
                 if (!_isPiConnected)

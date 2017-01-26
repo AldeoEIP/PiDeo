@@ -21,9 +21,26 @@
             <Grid Grid.Row="1">
                 <StackPanel>
                     <Grid>
-                        <TextBlock Name="Answer"/>
+                        <Grid x:Name="grid">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Path Fill="{StaticResource SystemControlHighlightAccentBrush}"  Stretch="Fill" Stroke="{StaticResource SystemControlHighlightAccentBrush}" HorizontalAlignment="Left" Margin="0,0,0,0" Width="25" Grid.Row="0" 
+        Data="M22.166642,154.45381 L29.999666,187.66699 40.791059,154.54395" RenderTransformOrigin="0.5,0.5" >
+                                <Path.RenderTransform>
+                                    <CompositeTransform Rotation="180"/>
+                                </Path.RenderTransform>
+
+                            </Path>
+                            <Grid Grid.Row="1" Background="{StaticResource SystemControlHighlightAccentBrush}">
+                                <TextBlock Name="Answer" Margin="10 2"  VerticalAlignment="Center"
+                                           FontSize="{StaticResource HubHeaderThemeFontSize}" Foreground="White" 
+                                           TextWrapping="Wrap" />
+                            </Grid>
+                        </Grid>
                     </Grid>
-                    <Grid x:Name="QuestionBox" Visibility="Collapsed" >
+                    <Grid x:Name="QuestionBox" Margin="0 12 0 0" Visibility="Collapsed" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition Width="Auto" />
@@ -42,8 +59,16 @@
                         Grid.Column="1" Content="" Background="{StaticResource SystemControlHighlightAccentBrush}"
                         Foreground="White" FontFamily="Segoe UI Symbol" FontSize="{StaticResource HubHeaderThemeFontSize}" Click="ButtonBase_OnClick"/>
                     </Grid>
-                    <StackPanel x:Name="CredentialsBox">
-                        <Grid>
+                    <Grid x:Name="CredentialsBox" Margin="0 12 0 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Row="0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition/>
@@ -51,18 +76,18 @@
                             <Button HorizontalAlignment="Center" IsEnabled="False" Height="100" Width="100"
                             Content="" Background="{StaticResource SystemControlHighlightAccentBrush}"
                             Foreground="White" FontFamily="Segoe UI Symbol" FontSize="{StaticResource HubHeaderThemeFontSize}" Click="Connect_OnClick"/>
-                        <Border Grid.Column="1" Margin="6,6,6,0"
+                            <Border Grid.Column="1" Margin="6,6,6,0"
                     BorderBrush="{StaticResource SystemControlHighlightAccentBrush}"
                     BorderThickness="0,0,0,6">
-                            <TextBox x:Name="LoginBox"
+                                <TextBox x:Name="LoginBox"
                          HorizontalAlignment="Stretch"
                          VerticalAlignment="Bottom"
                          Background="Transparent"
                          BorderThickness="0"
                          FontSize="{StaticResource TextStyleLargeFontSize}" />
-                        </Border>
+                            </Border>
                         </Grid>
-                        <Grid>
+                        <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition/>
@@ -73,20 +98,20 @@
                             <Border Grid.Column="1" Margin="6,6,6,0"
                     BorderBrush="{StaticResource SystemControlHighlightAccentBrush}"
                     BorderThickness="0,0,0,6">
-                            <PasswordBox x:Name="PasswordBox"
+                                <PasswordBox x:Name="PasswordBox"
                          HorizontalAlignment="Stretch"
                          VerticalAlignment="Bottom"
                          Background="Transparent"
                          BorderThickness="0"
                          FontSize="{StaticResource TextStyleLargeFontSize}" />
-                        </Border>
+                            </Border>
                         </Grid>
-                        <Grid Margin="0 12 0 0" Background="{StaticResource SystemControlHighlightAccentBrush}" Height="100">
-                            <Button HorizontalAlignment="Center"
+                        <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Margin="0 12 0 0" VerticalAlignment="Stretch" Height="Auto" Width="Auto" x:Name="ButtonContainer">
+                            <Button HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="100"
                             Content="" Background="{StaticResource SystemControlHighlightAccentBrush}"
                             Foreground="White" FontFamily="Segoe UI Symbol" FontSize="{StaticResource HubHeaderThemeFontSize}" Click="Connect_OnClick"/>
                         </Grid>
-                    </StackPanel>
+                    </Grid>
                 </StackPanel>
             </Grid>
         </Grid>
