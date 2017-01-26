@@ -8,6 +8,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using CoreDeo;
 
 namespace PiDeo {
     /// <summary>
@@ -19,6 +20,7 @@ namespace PiDeo {
         private GpioPin _pin;
         private bool _isPiConnected;
         ApplicationDataContainer _localSettings = ApplicationData.Current.LocalSettings;
+        private readonly Client _client = new Client ();
 
         protected override void OnNavigatedTo(NavigationEventArgs e) {
             base.OnNavigatedTo (e);
@@ -48,7 +50,7 @@ namespace PiDeo {
             var login = composite["login"].ToString ();
             var password = composite["password"].ToString ();
             try {
-                var connected = false;//await client.LoginAsync (login, password);
+                var connected = await _client.LoginAsync (login, password);
             }
             catch (Exception ex) {
                 Debug.WriteLine (ex.Message);
@@ -62,11 +64,10 @@ namespace PiDeo {
         private async void Connect_OnClick(object sender, RoutedEventArgs e) {
             var login = LoginBox.Text;
             var password = PasswordBox.Password;
-            //var client = new Client ();
 
             bool connected;
             try {
-                connected = false; //await client.LoginAsync (login, password);
+                connected = await _client.LoginAsync (login, password);
             }
             catch (Exception ex) {
                 Debug.WriteLine (ex.Message);
@@ -78,7 +79,7 @@ namespace PiDeo {
                 Answer.Text = "Oups je ne te reconnais pas! Recommence ou inscris toi sur ton smartphone.";
                 return;
             }
-            _localSettings.Values["credentials"] = new Windows.Storage.ApplicationDataCompositeValue {
+            _localSettings.Values["credentials"] = new ApplicationDataCompositeValue {
                 ["password"] = password,
                 ["login"] = login
             };
@@ -104,11 +105,12 @@ namespace PiDeo {
                 ButtonBase_OnClick (sender, null);
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e) {
-            Answer.Text = Ask (Message.Text);
+        private async void ButtonBase_OnClick(object sender, RoutedEventArgs e) {
+           var answer = await Ask (Message.Text);
+            Answer.Text = answer;
         }
 
-        private string Ask(string message) {
+        private async Task<string> Ask(string message) {
             if (string.IsNullOrWhiteSpace (message))
                 return "Il fait beau aujourd'hui.";
             if (message.Trim ().StartsWith ("Bye", StringComparison.OrdinalIgnoreCase)) {
@@ -123,7 +125,7 @@ namespace PiDeo {
             }
 
             try {
-                var answer = "yo";//await client.GetAnswerAsync (message);
+                var answer = await _client.GetAnswerAsync (message);
                 return answer;
             }
             catch (Exception ex) {
