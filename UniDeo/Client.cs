@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -39,6 +40,14 @@ namespace UniDeo {
         }
 
         #region user
+
+        public async Task<string> GetWearedItem() {
+            const string requestUri = "users/getWearedItem";
+            var json = await _httpHelper.GetAsync (Token, $"{requestUri}").ConfigureAwait (false);
+            var table = JsonConvert.DeserializeObject<Rootobject[]> (json);
+            return BaseUrl + table.First().item.texture;
+        }
+
         public Task<IEnumerable<User>> GetUsersAsync() {
             const string requestUri = "users";
             return GetTableAsync<User> (Token, requestUri);

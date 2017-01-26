@@ -2,6 +2,48 @@
 
 namespace UniDeo {
 
+    public class Rootobject {
+        public int id { get; set; }
+        public bool isUsed { get; set; }
+        public Created created { get; set; }
+        public Modified modified { get; set; }
+        public Item item { get; set; }
+    }
+
+    public class Created {
+        public string date { get; set; }
+        public int timezone_type { get; set; }
+        public string timezone { get; set; }
+    }
+
+    public class Modified {
+        public string date { get; set; }
+        public int timezone_type { get; set; }
+        public string timezone { get; set; }
+    }
+
+    public class Item {
+        public int id { get; set; }
+        public string name { get; set; }
+        public string texture { get; set; }
+        public int price { get; set; }
+        public Created1 created { get; set; }
+        public Modified1 modified { get; set; }
+    }
+
+    public class Created1 {
+        public string date { get; set; }
+        public int timezone_type { get; set; }
+        public string timezone { get; set; }
+    }
+
+    public class Modified1 {
+        public string date { get; set; }
+        public int timezone_type { get; set; }
+        public string timezone { get; set; }
+    }
+
+
     public class Answer {
         public string BotSay { get; set; }
     }

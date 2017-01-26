@@ -7,6 +7,7 @@ using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using UniDeo;
 
@@ -124,6 +125,10 @@ namespace PiDeo {
                 FlapDragon ();
                 return "Ça fait du bien de se dégourdir.";
             }
+            if (message.Trim ().Contains ("skin")) {
+                UpdateSkin ();
+                return "Whoa ! Je suis mieux ainsi. Merci.";
+            }
 
             try {
                 var answer = await _client.GetAnswerAsync (message);
@@ -133,6 +138,12 @@ namespace PiDeo {
                 Debug.WriteLine (ex.Message);
                 return "Désolé, je n'ai pas accès au savoir draconique.";
             }
+        }
+
+        private async void UpdateSkin()
+        {
+            var source = await _client.GetWearedItem();
+            ImageBox.Source = new BitmapImage(new Uri(source, UriKind.Absolute));
         }
 
         private async void FlapDragon() {

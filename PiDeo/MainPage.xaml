@@ -15,7 +15,7 @@
             </Grid.RowDefinitions>
 
             <Grid VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Row="0">
-                <Image Source="Assets/2017_logo_aldeo.png" MaxWidth="420"/>
+                <Image Source="Assets/2017_logo_aldeo.png" MaxWidth="420" x:Name="ImageBox"/>
             </Grid>
 
             <Grid Grid.Row="1">
